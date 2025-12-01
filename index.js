@@ -8,7 +8,7 @@ import { startSalesListener } from './services/salesListener.js';
 dotenv.config();
 
 const app = express();
-const port = process.env.PORT;
+const port = process.env.PORT || 3000;
 
 const client = new Client({
   intents: [
@@ -29,11 +29,10 @@ client.on('interactionCreate', async (interaction) => {
   }
 });
 
-client.once('ready', () => {
+client.once('clientReady', () => {
   console.log(`Bot logged in as ${client.user.tag}`);
   startSalesListener(client);
 });
-  
 
 app.use(express.json());
 
